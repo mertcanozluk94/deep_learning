@@ -139,37 +139,6 @@ Predict the next-day closing price of Google stock using an LSTM network with en
 
 ---
 
-## How Each Architecture Works (At a Glance)
-
-### Feedforward / Dense
-Information flows in one direction — input → hidden layers → output. Best for tabular data and simple classification/regression tasks.
-
-```
-[Input] → [Dense] → [Dense] → [Output]
-```
-
-### CNN (Convolutional)
-Filters slide over the input to detect local patterns (edges, textures, shapes). Best for images.
-
-```
-[Image] → [Conv → Pool] → [Conv → Pool] → [Flatten] → [Dense] → [Output]
-```
-
-### RNN (Recurrent)
-Each step's output depends on the previous step's hidden state — the network has **memory**. Best for sequences (text, time series).
-
-```
-   ↓        ↓        ↓
-[h₁] →   [h₂] →   [h₃] → ...
-   ↑        ↑        ↑
-  x₁       x₂       x₃
-```
-
-### LSTM
-A smarter RNN with gates that decide what to remember and what to forget. Solves the "vanishing gradient" problem for long sequences.
-
----
-
 ## Common Workflow
 
 Every notebook follows roughly this pattern:
@@ -238,19 +207,6 @@ Once you internalize this pattern, you can apply it to any new dataset.
 
 ---
 
-## Common Pitfalls
-
-| Pitfall | Symptom | Fix |
-|---|---|---|
-| **Unscaled inputs** | Loss explodes or stays flat | Apply `StandardScaler`/`MinMaxScaler` |
-| **Wrong loss function** | Garbage predictions | Match loss to task (see table above) |
-| **Test data in validation** | Overoptimistic results | Use `validation_split`, keep test set untouched |
-| **Shuffling time series** | Future leaks into past | `shuffle=False` |
-| **Calling wrong model name** | `NameError: name 'model' is not defined` | Match variable names exactly (e.g., `model_rnn` vs `model`) |
-| **Forgetting to scale features for RNN** | Loss won't decrease | Always scale inputs to RNNs/LSTMs |
-
----
-
 ## Project Structure
 
 ```
@@ -269,18 +225,6 @@ deep-learning-notebooks/
 ```
 
 > Place your dataset files in a `data/` folder and update file paths in each notebook to use relative paths like `data/diabetes.csv` for portability. CIFAR-10 is downloaded automatically by Keras.
-
----
-
-## Learning Path
-
-If you're new to deep learning, follow this order:
-
-1. **Start with 01** — the basic building blocks. Dense layers, activations, training loop.
-2. **Then 02** — extend to images. Learn convolutions and the modern CNN toolkit (BatchNorm, Dropout, augmentation).
-3. **Then 03** — your first sequence model. Embeddings, padding, RNN intuition.
-4. **Then 04** — apply RNNs to time series. Sliding windows, recursive forecasting.
-5. **Finish with 05** — LSTM. Build on RNN intuition and tackle a finance problem with feature engineering.
 
 ---
 
